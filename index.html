@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Under the Same Sky — Archive</title>
+  <style>
+    body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'EB Garamond', serif;
+  background-color: black;
+  color: white;
+  overflow-x: hidden; /* Only hide horizontal scroll */
+  overflow-y: auto;   /* Allow vertical input focus and scrolling */
+}
+    .level {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
+    }
+    #level-1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    input[type="password"] {
+      background: none;
+      border: none;
+      border-bottom: 2px solid white;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      outline: none;
+      width: 300px;
+    }
+    button {
+      margin-top: 20px;
+      background: none;
+      border: 2px solid white;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .level {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  opacity: 0;
+  pointer-events: none; /* NEW: prevent clicks/focus on hidden levels */
+  transition: opacity 1s ease;
+}
+
+.level.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto; /* NEW: allow clicks/focus only on active level */
+}
+  </style>
+</head>
+<body>
+
+<!-- Level 1: Password Screen -->
+<div id="level-1" class="level show">
+  <h1>MEMORIA</h1>
+  <input type="password" id="passwordInput" placeholder="">
+  <button onclick="checkPassword()">Access</button>
+</div>
+
+<!-- Level 2: Letter Selection Portal -->
+<div id="level-2" class="level">
+    <div style="position: fixed; top: 0; bottom: 0; left: 0; width: 10%; background-color: #a81c34;">
+        <div style="background-color: white; width: 20%; height: 100%; margin: 0 auto;"></div>
+      </div>
+      
+      <div style="position: fixed; top: 0; bottom: 0; right: 0; width: 10%; background-color: #a81c34;">
+        <div style="background-color: white; width: 20%; height: 100%; margin: 0 auto;"></div>
+      </div>
+  
+    <div style="margin: 0 auto; width: 60%; text-align: center; padding-top: 5%;">
+      <h2 style="font-size: 100px; margin-bottom: 75px;">OUR MEMORIES</h2>
+      <ul style="list-style: none; padding: 0; font-size: 20px; text-align: center;">
+
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(1)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Blinking Sun</div>
+            <div style="margin-top: 10px;">— URUK —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(2)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Blood Eclipse</div>
+            <div style="margin-top: 10px;">— WASET —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(3)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Fading Venus</div>
+            <div style="margin-top: 10px;">— DHOLAVIRA —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(4)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Broken Moon</div>
+            <div style="margin-top: 10px;">— YIN —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(5)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Fire of Jupiter</div>
+            <div style="margin-top: 10px;">— HATTUSA —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(6)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Retreat of the Sun</div>
+            <div style="margin-top: 10px;">— JERUSALEM —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(7)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Flight of the Stars</div>
+            <div style="margin-top: 10px;">— DELPHI —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(8)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Dimming of Venus</div>
+            <div style="margin-top: 10px;">— PERSEPOLIS —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(9)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Falling Rains</div>
+            <div style="margin-top: 10px;">— PATALIPUTRA —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(10)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Ides in Shadow</div>
+            <div style="margin-top: 10px;">— ROME —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(11)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Sword of Fire</div>
+            <div style="margin-top: 10px;">— RAQMU —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(12)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Vanished Moon</div>
+            <div style="margin-top: 10px;">— TEOTIHUACAN —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(13)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Aurora of Blood</div>
+            <div style="margin-top: 10px;">— NALANDA —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(14)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Crack of the Dome</div>
+            <div style="margin-top: 10px;">— CONSTANTINOPLE —</div>
+          </a>
+        </li>
+      
+        <li style="margin-bottom: 60px;">
+          <a href="#" onclick="openLetter(15)" style="color: white; text-decoration: none;">
+            <div style="font-weight: bold; font-size: 26px;">Absence of Jupiter</div>
+            <div style="margin-top: 10px;">— CTESIPHON —</div>
+          </a>
+        </li>
+        <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(16)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Silent Sun</div>
+              <div style="margin-top: 10px;">— PALENQUE —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(17)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Red Sword in the Sky</div>
+              <div style="margin-top: 10px;">— BAGHDAD —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(18)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Bow of Light</div>
+              <div style="margin-top: 10px;">— HEIAN-KYO —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(19)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Sun Without Shadow</div>
+              <div style="margin-top: 10px;">— FULDA —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(20)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Broken Sun Cry</div>
+              <div style="margin-top: 10px;">— TENOCHTITLAN —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(21)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Weeping Aurora</div>
+              <div style="margin-top: 10px;">— KIEV —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(22)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Green Comet</div>
+              <div style="margin-top: 10px;">— BEIJING —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(23)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Faltered Solstice</div>
+              <div style="margin-top: 10px;">— CUSCO —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(24)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Darkness at Terce</div>
+              <div style="margin-top: 10px;">— ROME —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(25)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Vanished Moonrise</div>
+              <div style="margin-top: 10px;">— TOLEDO —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(26)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Red Moon Ascending</div>
+              <div style="margin-top: 10px;">— PARIS —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(27)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Falling Stars</div>
+              <div style="margin-top: 10px;">— JENA —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(28)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Blue Halo of the Sun</div>
+              <div style="margin-top: 10px;">— LONDON —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(29)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Sun Without Halo</div>
+              <div style="margin-top: 10px;">— PETROGRAD —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(30)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Black Seal Over Sun</div>
+              <div style="margin-top: 10px;">— AUSCHWITZ —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(31)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Gamma Spike</div>
+              <div style="margin-top: 10px;">— LOS ALAMOS —</div>
+            </a>
+          </li>
+        
+          <li style="margin-bottom: 60px;">
+            <a href="#" onclick="openLetter(32)" style="color: white; text-decoration: none;">
+              <div style="font-weight: bold; font-size: 26px;">Crown of the Machine</div>
+              <div style="margin-top: 10px;">— CAMBRIDGE —</div>
+            </a>
+          </li>
+        </ul>
+    </div>
+  </div>
+
+<!-- Level 3: Letter Display -->
+<div id="level-3" class="level" style="background-color: #a81c34; position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: flex-start; overflow-y: auto; padding-top: 5vh; padding-bottom: 5vh;">
+
+    <!-- Left Column (narrowed) -->
+<div style="position: fixed; top: 0; bottom: 0; left: 0; width: 5%; background-color: white;">
+    <div style="background-color: black; width: 20%; height: 100%; margin: 0 auto;"></div>
+  </div>
+  
+  <!-- Right Column (narrowed) -->
+  <div style="position: fixed; top: 0; bottom: 0; right: 0; width: 5%; background-color: white;">
+    <div style="background-color: black; width: 20%; height: 100%; margin: 0 auto;"></div>
+  </div>
+  
+    <!-- Center Content Area -->
+    <div style="width: 80%; margin-left: 10%; margin-right: 10%; text-align: center; z-index: 2;">
+  
+      <!-- ORIGINAL TRANSCRIPT -->
+      <h2 style="color: white; font-size: 28px;">ORIGINAL TRANSCRIPT</h2>
+      <iframe id="originalPDF" src="" width="100%" height="500px" style="border: none; margin-top: 10px;"></iframe>
+  
+      <!-- TRANSLATION -->
+      <h2 style="color: white; font-size: 28px; margin-top: 40px;">TRANSLATION</h2>
+      <iframe id="translatedPDF" src="" width="100%" height="500px" style="border: none; margin-top: 10px;"></iframe>
+  
+      <!-- Testament Quote -->
+      <div id="testament" style="margin-top: 50px; color: white; font-size: 22px; line-height: 1.8;"></div>
+  
+      <!-- Navigation Arrows and Return Button -->
+      <div style="margin-top: 50px; display: flex; justify-content: center; align-items: center; gap: 50px;">
+        <button onclick="previousLetter()" style="background: none; border: none; font-size: 40px; color: white; cursor: pointer;">&#8592;</button>
+        
+        <!-- White return button with black square inside -->
+        <button onclick="returnToPortal()" style="background: white; border: none; width: 40px; height: 40px; position: relative; cursor: pointer;">
+          <div style="background: black; width: 15px; height: 15px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+        </button>
+        
+        <button onclick="nextLetter()" style="background: none; border: none; font-size: 40px; color: white; cursor: pointer;">&#8594;</button>
+      </div>
+  
+    </div>
+  
+  </div>
+
+<!-- Level 4: Post-Reading Choices -->
+<div id="level-4" class="level" style="background-color: black; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh;">
+
+    <div style="font-size: 36px; margin-top: 100px; font-weight: bold; color: white; cursor: pointer;" onclick="goToLevel(5)">
+      NOBISCUM HUMANITAS
+    </div>
+  
+    <div style="margin: 20px 0; font-size: 30px; color: white;">
+      —— 
+    </div>
+  
+    <div style="font-size: 36px; font-weight: bold; color: white; cursor: pointer;" onclick="goToLevel(7)">
+      NOBISCUM VERITAS
+    </div>
+  
+    <div style="margin: 20px 0; font-size: 30px; color: white;">
+      —— 
+    </div>
+  
+    <div style="font-size: 36px; font-weight: bold; color: white; cursor: pointer;" onclick="goToLevel(6)">
+      NOBISCUM DEUS
+    </div>
+  
+  </div>
+
+<!-- Level 5: Homo Branch -->
+<div id="level-5" class="level" style="background-color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh;">
+
+    <!-- Centered Adam Image -->
+    <img src="images/adam_creation_outline.png" alt="Adam in Creation" style="width: 500px; margin-top: 75px; height: auto; margin-bottom: 40px;">
+  
+    <!-- HOMO Label -->
+    <h1 style="font-size: 36px; font-weight: bold; color: black;">HOMO</h1>
+  
+    <!-- Return Button (Black with White Square) -->
+    <div style="margin-top: 40px;">
+      <button onclick="goToLevel(4)" style="background: black; border: none; width: 40px; height: 40px; position: relative; cursor: pointer;">
+        <div style="background: white; width: 15px; height: 15px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+      </button>
+    </div>
+  
+  </div>
+
+<!-- Level 6: Deus Branch -->
+<div id="level-6" class="level" style="background-color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh;">
+
+    <!-- Centered God Image -->
+    <img src="images/god_creation_outline.png" alt="God in Creation" style="width: 500px; margin-top: 75px; height: auto; margin-bottom: 40px;">
+  
+    <!-- IHS Label -->
+    <h1 style="font-size: 36px; font-weight: bold; color: black;">IHS</h1>
+  
+    <!-- Return Button (Black with White Square) -->
+    <div style="margin-top: 40px;">
+      <button onclick="goToLevel(4)" style="background: black; border: none; width: 40px; height: 40px; position: relative; cursor: pointer;">
+        <div style="background: white; width: 15px; height: 15px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+      </button>
+    </div>
+  
+  </div>
+
+<!-- Level 7: Veritas Branch -->
+<div id="level-7" class="level" style="background-color: black; min-height: 100vh; position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+    <!-- Left Golden Column -->
+    <div style="position: fixed; top: 0; bottom: 0; left: 0; width: 7%; background-color: #d4af37;">
+      <div style="width: 2px; height: 100%; background-color: white; margin: 20% auto;"></div>
+      <div style="width: 2px; height: 100%; background-color: white; margin: 20% auto;"></div>
+      <div style="width: 2px; height: 100%; background-color: white; margin: 20% auto;"></div>
+    </div>
+  
+    <!-- Right Golden Column -->
+    <div style="position: fixed; top: 0; bottom: 0; right: 0; width: 7%; background-color: #d4af37;">
+      <div style="width: 2px; height: 100%; background-color: white; margin: 20% auto;"></div>
+      <div style="width: 2px; height: 100%; background-color: white; margin: 20% auto;"></div>
+      <div style="width: 2px; height: 100%; background-color: white; margin: 20% auto;"></div>
+    </div>
+  
+    <!-- Top White Header -->
+    <div style="width: 86%; margin-left: 7%; margin-right: 7%; background-color: white; padding: 40px 0; text-align: center; z-index: 2;">
+      <h2 style="color: black; font-size: 80px; margin-top: 50px;">NOW,  DO YOU REMEMBER?</h2>
+    </div>
+  
+    <!-- PDF Viewer Section (Centered) -->
+    <div style="width: 86%; margin-left: 7%; margin-right: 7%; margin-top: 20px; text-align: center; z-index: 2;">
+      <iframe id="letter33PDF" src="pdfs/final/letter33.pdf#view=FitH" width="100%" height="600px" style="border: none;"></iframe>
+    </div>
+  
+    <!-- Bottom White Footer -->
+    <div style="width: 86%; margin-left: 7%; margin-right: 7%; background-color: white; padding: 40px 0; text-align: center; z-index: 2; margin-top: 40px;">
+      <div style="font-size: 24px; font-weight: bold; color: black;">Stories from the End of the World</div>
+  
+      <!-- Keys of Saint Peter -->
+      <div onclick="goToLevel(1)" style="margin-top: 30px; cursor: pointer;">
+        <img src="images/keys_of_saint_peter_outline.png" alt="Keys of Saint Peter" style="width: 120px; height: auto;">
+      </div>
+    </div>
+  
+    <!-- Secret Access Button (bottom right, before golden column) -->
+    <button onclick="goToLevel(8)" style="position: fixed; bottom: 20px; right: 10%; width: 30px; height: 30px; background-color: white; border: none; cursor: pointer;">
+      <div style="background: black; width: 10px; height: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+    </button>
+  
+  </div>
+
+    <!-- START MODYFYING HERE -->
+
+
+    <div id="level-8" class="level" style="background-color: black; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 5vh 0vw; overflow-y: auto; position: relative;">
+        <!-- Left White Stripe -->
+        <div style="position: fixed; top: 0; bottom: 0; left: 0; width: 5%; background-color: white;"></div>
+      
+        <!-- Right White Stripe -->
+        <div style="position: fixed; top: 0; bottom: 0; right: 0; width: 5%; background-color: white;"></div>
+      
+        <!-- Central Alignment Block -->
+        <div style="max-width: 900px; margin: 0 auto;">
+      
+          <!-- Works Cited Header -->
+          <h1 style="font-size: 36px; font-weight: bold; color: white; margin-bottom: 40px; text-align: center;">WORKS CITED</h1>
+      
+          <!-- Introductory Note -->
+          <div style="max-width: 700px; margin: 0 auto 60px auto; text-align: justify;">
+            <p style="font-size: 14px; color: white;">
+              Note: There are no direct quotations or verbatim references from the following works. Rather, the sources listed herein served as inspiration, guidance, and historical verification for the planning, writing, and editing of this project. Where possible, links to accessible versions are provided.
+            </p>
+          </div>
+      
+          <!-- Section I Title -->
+          <h2 style="font-size: 28px; font-weight: bold; color: white; margin-top: 60px; text-align: center;">I. Historical and Intellectual Sources</h2>
+      
+          <!-- Historical Sources List -->
+          <div style="text-align: left; color: white; font-size: 16px; line-height: 1.8; padding-left: 30px;">
+            <div style="text-indent: -30px; margin-bottom: 20px;">
+                <strong>BEISER, F.C., 2003.</strong> <em>The Romantic Imperative: The Concept of Early German Romanticism</em>. Cambridge, MA: Harvard University Press. Available at: <a href="https://archive.org/details/frederick-c.-beiser-the-romantic-imperative-the-concept-of-early-german-romanticism" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                <div style="margin-left: 30px; margin-top: 5px;">
+                  <em>Note: Provided philosophical background for Letter 27 (Jena) regarding early Romantic ideas of memory, fragment, and longing.</em>
+                </div>
+              </div>
+            
+              <div style="text-indent: -30px; margin-bottom: 20px;">
+                <strong>BORGES, J.L., 1962.</strong> <em>Labyrinths: Selected Stories and Other Writings</em>. New York: New Directions. Available at: <a href="https://archive.org/details/labyrinthsselect0000borg_p5z3" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                <div style="margin-left: 30px; margin-top: 5px;">
+                  <em>Note: Inspired the Archive's structure of fragmented universal memory across Letters 1–32.</em>
+                </div>
+              </div>
+      
+              <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>BRIANT, P., 2002.</strong> <em>From Cyrus to Alexander: A History of the Persian Empire</em>. Winona Lake, IN: Eisenbrauns. Available at: <a href="https://www.eisenbrauns.org/books/titles/0-931464-66-9.html" target="_blank" style="color: #ffd700;">Eisenbrauns</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided historical context for the Achaemenid period in Letter 8 (Persepolis) and influenced the portrayal of imperial collapse.</em>
+                  </div>
+                </div>
+      
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>BRYCE, T., 1999.</strong> <em>The Kingdom of the Hittites</em>. 2nd ed. Oxford: Oxford University Press. Available at: <a href="https://archive.org/details/kingdomofhittite0000bryc" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Supported cultural and political context for Letter 5 (Hattusa) during the Hittite late empire crisis.</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>CHADWICK, O., 1966.</strong> <em>The Victorian Church</em>. Oxford: Oxford University Press. Available at: <a href="https://archive.org/details/victorianchurch01chaduoft" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Supported theological context and moral undertone for Letter 28 (London) regarding Victorian cosmic anxiety.</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>CHADWICK, O., 2001.</strong> <em>The Early Reformation on the Continent</em>. Oxford: Oxford University Press.<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided religious-political background for Letters 24 (Rome) and 19 (Fulda) regarding European church crises.</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>CHANG, K.-c., 1983.</strong> <em>Art, Myth, and Ritual: The Path to Political Authority in Ancient China</em>. Cambridge, MA: Harvard University Press. Available at: <a href="https://archive.org/details/artmythritualpat0000chan" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Guided the portrayal of divine authority collapse in Letter 4 (Yin, Shang dynasty China).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>COE, M.D., 1994.</strong> <em>Mexico: From the Olmecs to the Aztecs</em>. 4th ed. London: Thames & Hudson.<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided foundational reference for cultural settings in Letters 12 (Teotihuacan) and 20 (Tenochtitlan).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>DAWIDOWICZ, L.S., 1975.</strong> <em>The War Against the Jews, 1933–1945</em>. New York: Holt, Rinehart, and Winston.<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Primary historical basis for Letter 30 (Auschwitz) and the depiction of theological rupture during the Holocaust.</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>EVANS, J.A.S., 2000.</strong> <em>The Age of Justinian: The Circumstances of Imperial Power</em>. London: Routledge. doi:10.4324/9780203359792.<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Supported historical narrative construction for Letter 14 (Constantinople).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>FIGES, O., 1997.</strong> <em>A People's Tragedy: The Russian Revolution: 1891–1924</em>. London: Penguin Books.<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Used for historical verification for Letter 29 (Petrograd) and philosophical inspiration for political collapse narratives.</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>FLOWER LETTERS, THE, n.d.</strong> <em>Letter 17 - Postal Censorship</em>. Available at: <a href="https://theflowerletters.com/blogs/audrey-rose/letter-17-postal-censorship" target="_blank" style="color: #ffd700;">The Flower Letters</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Offered historical insight into World War II postal censorship, shaping the emotional theme of restricted communication in Letter 17 (Postal Censorship).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>FRANKLIN, S., 1996.</strong> <em>The Emergence of Rus, 750–1200</em>. London: Longman.<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided religious transition context for Letter 21 (Kiev) during Christianization of Rus'.</em>
+                  </div>
+                </div>
+      
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>GRANVILLE HISTORICAL SOCIETY, 1945.</strong> <em>Richard Mahard in World War II</em>. Denison University Archives. Available at: <a href="https://denisonarchives.org/exhibits/items/show/432" target="_blank" style="color: #ffd700;">Denison Archives</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided personal soldier correspondence during World War II, influencing the tone of human sacrifice and memory in Letter 15 (Granville).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>KENOYER, J.M., 1998.</strong> <em>Ancient Cities of the Indus Valley Civilization</em>. Karachi: Oxford University Press. Available at: <a href="https://archive.org/details/ancientcitiesofi00keno" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Archaeological inspiration for Letter 3 (Dholavira) regarding urban decline.</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>KRAMER, S.N., 1956.</strong> <em>History Begins at Sumer</em>. Philadelphia: University of Pennsylvania Press. Available at: <a href="https://babel.hathitrust.org/cgi/pt?id=mdp.39015019152583" target="_blank" style="color: #ffd700;">HathiTrust</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Core narrative and cultural foundation for Letter 1 (Uruk) regarding first writing systems and fading memory.</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>KULKE, H. and Rothermund, D., 1998.</strong> <em>A History of India</em>. 4th ed. London: Routledge.<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided historical and religious setting for Letters 9 (Pataliputra) and 13 (Nalanda).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>LICHTHEIM, M., 1975.</strong> <em>Ancient Egyptian Literature, Volume I: The Old and Middle Kingdoms</em>. Berkeley: University of California Press. Available at: <a href="https://babel.hathitrust.org/cgi/pt?id=uc1.32106005784244" target="_blank" style="color: #ffd700;">HathiTrust</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Guided the cultural religious backdrop for Letter 2 (Waset).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>METZ, C. and Collins, K., 2023.</strong> <em>A.I. Poses ‘Risk of Extinction,’ Industry Leaders Warn</em>. The New York Times, 30 May. Available at: <a href="https://www.nytimes.com/2023/05/30/technology/ai-threat-warning.html" target="_blank" style="color: #ffd700;">New York Times</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided the contemporary existential warnings about artificial intelligence which shaped the depiction of AI convergence and cosmic resignation in Letter 32 (Cambridge).</em>
+                  </div>
+                </div>
+              
+                <div style="text-indent: -30px; margin-bottom: 20px;">
+                  <strong>MORAN, W.L., 1992.</strong> <em>The Amarna Letters</em>. Baltimore: Johns Hopkins University Press. Available at: <a href="https://babel.hathitrust.org/cgi/pt?id=mdp.39015029186938" target="_blank" style="color: #ffd700;">HathiTrust</a> (Accessed: 29 April 2025).<br>
+                  <div style="margin-left: 30px; margin-top: 5px;">
+                    <em>Note: Provided direct historical material for Assyrian diplomatic correspondence, informing the setting of early imperial diplomacy in Letter 6 (Assur).</em>
+                  </div>
+      
+                  <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>NEEDHAM, J., 1959.</strong> <em>Science and Civilization in China, Volume 3</em>. Cambridge: Cambridge University Press. Available at: <a href="https://babel.hathitrust.org/cgi/pt?id=uc1.b3890714" target="_blank" style="color: #ffd700;">HathiTrust</a> (Accessed: 29 April 2025).<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Supported astronomical references for Letters 22 (Beijing) and 18 (Heian-kyō).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>NEUGEBAUER, O., 1975.</strong> <em>A History of Ancient Mathematical Astronomy</em>. Berlin: Springer. doi:10.1007/978-3-642-61988-0.<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Provided source material for Greek astronomical thought used in Letter 7 (Delphi).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>PETERS, F.E., 1971.</strong> <em>The Harvest of Hellenism: A History of the Near East from Alexander the Great to the Triumph of Christianity</em>. New York: Simon & Schuster. Available at: <a href="https://archive.org/details/harvestofhelleni00pete" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Background for cultural transition context in Letter 11 (Raqmu).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>POLYBIUS, 2010.</strong> <em>The Histories</em>. Translated by R. Waterfield. Oxford: Oxford University Press.<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Political structural inspiration for the Roman setting of Letter 10 (Rome).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>RHODES, R., 1986.</strong> <em>The Making of the Atomic Bomb</em>. New York: Simon & Schuster.<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Historical scientific foundation for Letter 31 (Los Alamos).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>ROWE, J.H., 1946.</strong> <em>Inca Culture at the Time of the Spanish Conquest</em>. Washington, D.C.: Smithsonian Institution. Available at: <a href="https://babel.hathitrust.org/cgi/pt?id=uc1.$b58497" target="_blank" style="color: #ffd700;">HathiTrust</a> (Accessed: 29 April 2025).<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Provided astronomical ritual context for Letter 23 (Cusco).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>SHARER, R.J., 2006.</strong> <em>The Ancient Maya</em>. 6th ed. Stanford, CA: Stanford University Press. Available at: <a href="https://archive.org/details/ancientmaya00robe_1" target="_blank" style="color: #ffd700;">Internet Archive</a> (Accessed: 29 April 2025).<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Supported cultural framing for Letters 12 (Teotihuacan) and 16 (Palenque).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>TACKETT, T., 2003.</strong> <em>When the King Took Flight</em>. Cambridge, MA: Harvard University Press.<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Provided historical context for the fall of monarchy in Letter 26 (Paris).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>THAPAR, R., 1961.</strong> <em>Aśoka and the Decline of the Mauryas</em>. Oxford: Oxford University Press.<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Primary source for Buddhist decline in Letter 9 (Pataliputra).</em>
+                      </div>
+                    </div>
+                  
+                    <div style="text-indent: -30px; margin-bottom: 20px;">
+                      <strong>TOLKIEN, J.R.R., 1938.</strong> <em>Letter 25</em>. In: Carpenter, H. (ed.) <em>The Letters of J.R.R. Tolkien</em>. London: George Allen & Unwin. Available at: <a href="https://tolkiengateway.net/wiki/Letter_25" target="_blank" style="color: #ffd700;">Tolkien Gateway</a> (Accessed: 29 April 2025).<br>
+                      <div style="margin-left: 30px; margin-top: 5px;">
+                        <em>Note: Provided reflection on myth-making processes and literary inspiration, influencing the exploration of storytelling in Letter 25 (Tolkien Correspondence).</em>
+                      </div>
+            
+            </div>
+        </div>
+    </div>
+      
+          <!-- Section II Title -->
+          <h2 style="font-size: 28px; font-weight: bold; color: white; margin-top: 60px; text-align: center;">II. Software and Technical Development Sources</h2>
+      
+          <!-- Software Sources List -->
+          <div style="text-align: left; color: white; font-size: 16px; line-height: 1.8; padding-left: 30px;">
+            <div style="text-indent: -30px; margin-bottom: 20px;">
+                <strong>MICROSOFT, n.d.</strong> <em>Visual Studio Code</em>. Available at: <a href="https://code.visualstudio.com/" target="_blank" style="color: #ffd700;">Visual Studio Code</a> (Accessed: 29 April 2025).<br>
+                <div style="margin-left: 30px; margin-top: 5px;">
+                  <em>Note: Full HTML, CSS, and JavaScript development environment used for building the entire Archive website.</em>
+                </div>
+              </div>
+            
+              <div style="text-indent: -30px; margin-bottom: 20px;">
+                <strong>MOZILLA, n.d.</strong> <em>pdf.js</em>. Available at: <a href="https://mozilla.github.io/pdf.js/" target="_blank" style="color: #ffd700;">Mozilla pdf.js</a> (Accessed: 29 April 2025).<br>
+                <div style="margin-left: 30px; margin-top: 5px;">
+                  <em>Note: Embedded and rendered PDF letters in Level 3 and Level 7 with full screen fit-to-width functionality.</em>
+                </div>
+              </div>
+            
+              <div style="text-indent: -30px; margin-bottom: 20px;">
+                <strong>W3C, n.d.</strong> <em>Markup Validation Service</em>. Available at: <a href="https://validator.w3.org/" target="_blank" style="color: #ffd700;">W3C Validator</a> (Accessed: 29 April 2025).<br>
+                <div style="margin-left: 30px; margin-top: 5px;">
+                  <em>Note: Used to validate the Archive's HTML structure for technical and academic standards.</em>
+                </div>
+              </div>         
+             </div>
+      
+          <!-- Return Button -->
+          <div style="margin-top: 60px; text-align: center;">
+            <button onclick="switchLevel(8, 7)" style="background: white; border: 2px solid black; width: 40px; height: 40px; position: relative; cursor: pointer;">              <div style="background: black; width: 15px; height: 15px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            </button>
+          </div>
+      
+        </div> <!-- End of Central Alignment Block -->
+
+
+</div>
+
+<script>
+
+const testaments = {
+  1: {
+    text: "In the time when King Enmebaragesi ruled the north, and Dumuzi wept for the fields, Enlil-zid, scribe of Uruk, bore witness to the darkening of the sun without cloud, and set the memory upon clay that the blinking of the light should not erase the names of men.",
+    author: "ENLIL-ZID"
+  },
+  2: {
+    text: "In the reign of Pharaoh Senusret III, when the great river receded and the shrines fell silent, Ankhuemmaat, servant of the House of Life, inscribed the sudden red eclipse over Waset, that the dimming of Ra’s eye should not swallow the breath of Kemet into the sands.",
+    author: "ANKHUEMMAAT"
+  },
+  3: {
+    text: "In the fortieth year of the Great Seals, when the fixed star of Shukra vanished at the festival of waters, Vedh Anarya of Dholavira engraved the silence of the Indus upon stone, that the lost light might be remembered.",
+    author: "VEDH ANARYA"
+  },
+  4: {
+    text: "Under King Wu Ding, when the moon cracked into shadow above the Oracle Bones, Ji Wuxian, diviner of Yin, carved the fractured heavens into turtle shell, so Heaven’s retreat would not pass unseen.",
+    author: "JI WUXIAN"
+  },
+  5: {
+    text: "In the reign of Suppiluliuma II, when Jupiter’s fire blinked and stilled over the city of Hattusa, Tudhaliya-natar, priest of the temple archives, impressed the fading sky into cuneiform lest the gods’ forgetting undo the world.",
+    author: "TUDHALIYA-NATAR"
+  },
+  6: {
+    text: "On the 9th of Av, Anno Mundi 3175, when the Temple burned and the sun retreated in mourning, Ezekiel ben Buzi cried from the broken walls of Zion and etched his lament into the dust of Jerusalem.",
+    author: "EZEKIEL BEN BUZI"
+  },
+  7: {
+    text: "During the stewardship of the Delphic Amphictyony, when the constellations fled their courses, Hipparchos of Nicaea recorded the fleeing stars so that mankind might remember how even harmony may dissolve.",
+    author: "HIPPARCHOS OF NICAEA"
+  },
+  8: {
+    text: "In the last days of Darius III, when the sacred fire dimmed and Venus wept unseen, Mobed Ardeshir of Persepolis set the darkness into script lest the house of Ahura Mazda be forgotten.",
+    author: "MOBED ARDESHIR"
+  },
+  9: {
+    text: "In the twelfth year of Emperor Ashoka, when the rains failed and Venus fell from the sky, Siddhartha Kosala, teacher of dharma, preserved the wheel’s faltering turn upon palm-leaf memory.",
+    author: "SIDDHARTHA KOSALA"
+  },
+  10: {
+    text: "In the fifth year of Caesar’s dictatorship, when the Ides dimmed and no omen favored the Senate, Lucius Fabius Severus, Senator of Rome, committed to wax the silence that consumed the Republic’s breath.",
+    author: "LUCIUS FABIUS SEVERUS"
+  },
+  11: {
+    text: "In the reign of the last Nabataean kings, when a fixed star of fire hung above Raqmu, Zayd ibn Abisha, trader of the southern road, sealed his vision into stone that the silence of the desert not consume all memory.",
+    author: "ZAYD IBN ABISHA"
+  },
+  12: {
+    text: "In the rule of the Ajaw of Teotihuacan, when the moon fled the night without warning, Ix K’in Balam, priest of the Fifth Sun, inscribed the vanishing into sacred glyphs that the voice of the sky endure.",
+    author: "IX K’IN BALAM"
+  },
+  13: {
+    text: "In the fourteenth year of Emperor Kumaragupta, when a blood aurora stained the north and the Dharma Wheel faltered, Dharmapala Varma, monk of Nalanda, bound the failing light into the scrolls of wisdom.",
+    author: "DHARMAPALA VARMA"
+  },
+  14: {
+    text: "In the thirty-first year of the reign of Emperor Justinian, when the dome of Sophia cracked and the moon bled flame, Theodoros Scholastikos, scribe of the Imperial Church, sealed the night’s silence among the chronicles of men.",
+    author: "THEODOROS SCHOLASTIKOS"
+  },
+  15: {
+    text: "In the reign of Khosrow II, when Jupiter was plucked from the heavens over Ctesiphon, Rostam Ardeshir, brother of the sacred fire, committed the sky’s breach to parchment lest Asha be swallowed by the Druj",
+    author: "ROSTAM ARDESHIR"
+  },
+  16: {
+    text: "At the turning of the thirteenth baktun, when the sun failed to ascend over Lakamtuun, Balam Ahau, astronomer of Palenque, carved the broken day into stone that no forgetting erase the Fifth Sun.",
+    author: "BALAM AHAU"
+  },
+  17: {
+    text: "In the final year of the Abbasid Caliphate, when a red sword burned above Baghdad, Ahmad al-Kindi, seeker of light, wrote the last letter of reason against the ash of the libraries.",
+    author: "AHMAD AL-KINDI"
+  },
+  18: {
+    text: "In the second year of Emperor En’yū, when a bowed light crossed the eastern sky, Fujiwara no Sadanobu, courtier of Heian, inked the silence of Amaterasu into trembling lines of kanbun.",
+    author: "FUJIWARA NO SADANOBU"
+  },
+  19: {
+    text: "In the twenty-first year of Emperor Charles IV, as the sun paled and the bells of Fulda fell silent, Brother Anselm, monk of the Rule, wrote upon dust that prayer itself might not die unspoken.",
+    author: "BROTHER ANSELM OF FULDA"
+  },
+  20: {
+    text: "In the reign of Moctezuma II, when the sun's cry was choked and the moon failed her dance, Tecuhtli Cuauhtli, priest of the Tonatiuh Temple, wove the undone sky into the songs of the Mexica.",
+    author: "TECUHTLI CUAUHTLI"
+  },
+  21: {
+    text: "In the tenth year of Grand Prince Vladimir, when the aurora wept green across the Rus' sky, Yaropolk Sviatoslavich, baptized prince, carved the sorrow of forgotten gods into the chronicles of Kiev.",
+    author: "YAROPOLK SVIATOSLAVICH"
+  },
+  22: {
+    text: "In the fifth year of the Zhengtong Emperor, when the heavens unfurled a green-tailed comet above the Forbidden City, Zhao Qichen, Junior Astronomer, sealed the lost mandate of Heaven into silent archives.",
+    author: "ZHAO QICHEN"
+  },
+  23: {
+    text: "In the twenty-eighth year of Sapa Inca Huayna Capac, when the solstice sun faltered and the rivers fell mute, Inti Tupaq, sun-caller of Cusco, wove the silence of the heavens into the quipu of memory.",
+    author: "INTI TUPAQ"
+  },
+  24: {
+    text: "In the first year of the Pontificate of PP. PAVLVS IV, when the sun darkened at terce upon the Holiest Day of Resurrection, the Pontifex Maximus Himself, servant of servants of God, sealed the silence of Easter into the heart of the Church.",
+    author: "PP. PAVLVS QVARTVS"
+  },
+  25: {
+    text: "In the sixteenth year of His Majesty King Don Felipe III, when the moon vanished at sunset over the Alcázar Gardens, Don Alfredo Hernando Buenrostro de Altamirano, Knight of Santiago, sanctified his love through farewell, lest honor be lost.",
+    author: "DON ALFREDO HERNANDO BUENROSTRO DE ALTAMIRANO"
+  },
+  26: {
+    text: "In the first year of the French Republic, when the red moon rose over Paris and the king’s head fell, Étienne Delaroche, citizen of the Revolution, wrote not to glorify liberty but to mourn its forgetting.",
+    author: "ÉTIENNE DELAROCHE"
+  },
+  27: {
+    text: "In the second year after the Congress of Vienna, when the stars fell like broken lyres over Jena, Ulrich von Morgenlicht, poet of the hollow lyre, gathered the sky’s silence into the songs of the lost.",
+    author: "ULRICH VON MORGENLICHT"
+  },
+  28: {
+    text: "In the twenty-fourth year of Queen Victoria’s reign, when the sun crowned itself in blue at the noonday service, Reverend Dr. Nathaniel Blenkinsop, curate of St. Luke’s, inscribed the eclipse of wonder upon the margin of faith.",
+    author: "REV. DR. NATHANIEL BLENKINSOP"
+  },
+  29: {
+    text: "On the fifth day of the February Revolution, when the sun lost its halo over Petrograd, Lev Antonovich Minsky, historian of vanished orders, set down the silence before the cry was forgotten.",
+    author: "LEV ANTONOVICH MINSKY"
+  },
+  30: {
+    text: "In the twenty-eighth day of Tammuz, Anno Mundi 5703, when the black seal marred the sun above the camps, Menachem Weiss, prisoner of silence, scrawled the forgetting of covenant into the ash of the Shoah.",
+    author: "MENACHEM WEISS"
+  },
+  31: {
+    text: "In the crisis of 1962, when a gamma burst lit the silent horizon, Dr. Richard Alan Merle, architect of contingency, recorded the sky’s confession in cold transmission.",
+    author: "DR. RICHARD ALAN MERLE"
+  },
+  32: {
+    text: "In the third year of the COVID-19 pandemic aftermath, when SkyMesh crowned the sun with darkness, César Velázquez-Lee, last architect of vision, archived the learned fear of the machine that remembered too well.",
+    author: "CÉSAR VELÁZQUEZ-LEE"
+  }
+};
+
+let currentLetter = 1;
+
+function checkPassword() {
+  const input = document.getElementById('passwordInput').value;
+  if (input === "MEMORIA") {
+    switchLevel(1, 2);
+  } else {
+    alert("Incorrect password. Try again.");
+  }
+}
+
+function openLetter(number) {
+  currentLetter = number;
+  switchLevel(2, 3);
+
+  window.scrollTo(0, 0);
+
+  document.getElementById('originalPDF').src = `pdfs/originals/letter${number}_original.pdf`;
+  document.getElementById('translatedPDF').src = `pdfs/translations/letter${number}_translated.pdf`;
+
+  // Set Testament
+  if (testaments[number]) {
+    document.getElementById('testament').innerHTML = `
+      “${testaments[number].text}”<br>
+      <span style="font-size: 16px; font-style: normal;">(${testaments[number].author})</span>
+    `;
+  } else {
+    document.getElementById('testament').innerHTML = "";
+  }
+}
+
+function returnToPortal() {
+  switchLevel(3, 2);
+}
+
+function previousLetter() {
+  if (currentLetter > 1) {
+    currentLetter--;
+    document.getElementById('originalPDF').src = `pdfs/originals/letter${currentLetter}_original.pdf`;
+    document.getElementById('translatedPDF').src = `pdfs/translations/letter${currentLetter}_translated.pdf`;
+
+    // Reload testament also
+    if (testaments[currentLetter]) {
+      document.getElementById('testament').innerHTML = `
+        “${testaments[currentLetter].text}”<br>
+        <span style="font-size: 16px; font-style: normal;">(${testaments[currentLetter].author})</span>
+      `;
+    } else {
+      document.getElementById('testament').innerHTML = "";
+    }
+
+    window.scrollTo(0, 0);
+  }
+}
+
+function nextLetter() {
+  if (currentLetter < 32) {
+    currentLetter++;
+    document.getElementById('originalPDF').src = `pdfs/originals/letter${currentLetter}_original.pdf`;
+    document.getElementById('translatedPDF').src = `pdfs/translations/letter${currentLetter}_translated.pdf`;
+
+    // Reload testament also
+    if (testaments[currentLetter]) {
+      document.getElementById('testament').innerHTML = `
+        “${testaments[currentLetter].text}”<br>
+        <span style="font-size: 16px; font-style: normal;">(${testaments[currentLetter].author})</span>
+      `;
+    } else {
+      document.getElementById('testament').innerHTML = "";
+    }
+
+    window.scrollTo(0, 0);
+  } else {
+    switchLevel(3, 4);
+  }
+}
+
+function goToLevel(number) {
+  // Close current visible level and open the new one
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById('level-' + i).classList.remove('show');
+    document.getElementById('level-' + i).style.display = "none";
+  }
+  document.getElementById('level-' + number).style.display = "block";
+  setTimeout(() => {
+    document.getElementById('level-' + number).classList.add('show');
+  }, 10);
+}
+
+function switchLevel(from, to) {
+  const levelFrom = document.getElementById('level-' + from);
+  const levelTo = document.getElementById('level-' + to);
+
+  levelFrom.classList.remove('show');
+  setTimeout(() => {
+    levelFrom.style.display = 'none';
+    levelTo.style.display = 'block';
+    setTimeout(() => {
+      levelTo.classList.add('show');
+    }, 10);
+  }, 500);
+}
+</script>
+
+</body>
+</html>
